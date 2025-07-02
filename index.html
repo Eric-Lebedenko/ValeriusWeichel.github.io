@@ -1,1285 +1,321 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
-
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TokFlare - Платформа для блогеров</title>
-  <!-- Подключаем шрифты: PT Sans, PT Serif и Dancing Script (для рукописного текста) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Dancing+Script&family=Russo+One&display=swap"
-    rel="stylesheet">
-  rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #333333;
-      /* Акцентный цвет для элементов */
-      --accent-color: #27ae60;
-      --accent-hover: #2ecc71;
-      --nav-bg: #ffffff;
-      --footer-bg: #333333;
-      --footer-text: #ffffff;
-      --card-bg: #ffffff;
-      --comparison-bg: linear-gradient(135deg, #fdfdfd, #f0f0f0);
-    }
-
-    [data-theme="dark"] {
-      --bg-color: #1a1a1a;
-      --text-color: #f8f8f8;
-      --nav-bg: #222;
-      --footer-bg: #111;
-      --footer-text: #f8f8f8;
-      --card-bg: #2a2a2a;
-      --comparison-bg: linear-gradient(135deg, #2a2a2a, #1f1f1f);
-      --accent-color: #2c3f34;
-      --accent-hover: #289c58;
-    }
-
-    body {
-      font-family: 'Russo One', sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      background: var(--bg-color);
-      color: var(--text-color);
-      font-size: 18px;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    h1,
-    h2,
-    h3,
-    .logo {
-      font-family: 'Russo One', sans-serif;
-      font-size: 36px;
-    }
-
-    /* Для браузеров на основе Webkit (Chrome, Safari, Opera) */
-    html::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Для Firefox */
-    html {
-      scrollbar-width: none;
-      /* скрывает скроллбар в Firefox */
-    }
-
-    /* Навигация */
-    nav {
-      background: var(--nav-bg);
-      padding: 10px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-    }
-
-    nav .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: var(--text-color);
-      margin-right: 20px;
-    }
-    .logo a {
-  font-size: 36px;
-  text-decoration: none;
-  color: inherit;
-}
-
-    nav .nav-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    nav a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--accent-color);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-right: 30px;
-      /* Добавляем отступ справа */
-    }
-
-
-    .theme-switcher,
-    .lang-switcher {
-      cursor: pointer;
-      padding: 10px 15px;
-      font-size: 18px;
-      background: var(--accent-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-
-    .theme-switcher:hover,
-    .lang-switcher:hover {
-      background: var(--accent-hover);
-    }
-
-    /* Главный экран (баннер) */
-    .hero-section {
-      padding: 150px 20px;
-      background: #2c3f34;
-      /* зелёный фон */
-      color: white;
-      text-align: center;
-      margin-top: 70px;
-      position: relative;
-      /* для позиционирования псевдоэлементов и декораций */
-      overflow: hidden;
-    }
-
-    /* Декоративный рукописный текст TokFlare на заднем плане */
-    .hero-section::before {
-      content: "TokFlare";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-15deg);
-      font-family: 'Dancing Script', cursive;
-      font-size: 300px;
-      color: rgba(0, 0, 0, 0.25);
-      z-index: 0;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Блок с декоративными картинками (доллар и логотип TikTok) */
-    .hero-decorations .decor-dollar {
-      position: absolute;
-      left: 5%;
-      width: 500px;
-      opacity: 0.9;
-      animation: floatDollar 7s ease-in-out infinite;
-    }
-
-    .hero-decorations .decor-tiktok {
-      position: absolute;
-      top: 10%;
-      right: 5%;
-      width: 420px;
-      opacity: 0.9;
-      animation: floatTikTok 10s ease-in-out infinite;
-    }
-
-    @keyframes floatDollar {
-      0% {
-        transform: translateY(0) rotate(0deg);
-
-      }
-
-      50% {
-        transform: translateY(-20px) rotate(5deg);
-      }
-
-      100% {
-        transform: translateY(0) rotate(0deg);
-      }
-    }
-
-    @keyframes floatTikTok {
-      0% {
-        transform: translateY(0) rotate(0deg);
-      }
-
-      50% {
-        transform: translateY(15px) rotate(-5deg);
-      }
-
-      100% {
-        transform: translateY(0) rotate(0deg);
-      }
-    }
-
-    /* Поднимаем контент над декоративными элементами */
-    .hero-section>* {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-section h1 {
-      font-size: 60px;
-      margin-bottom: 20px;
-    }
-
-    .hero-section p {
-      font-size: 24px;
-      max-width: 800px;
-      margin: 0 auto 30px auto;
-      line-height: 1.4;
-    }
-
-    .cta-button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 40px;
-      font-size: 22px;
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .cta-button:hover {
-      background: white;
-      color: var(--accent-color);
-      transform: translateY(-3px);
-    }
-
-    /* Описание платформы */
-    .description-section {
-      max-width: 1000px;
-      margin: 50px auto;
-      padding: 0 20px;
-      text-align: left;
-      position: relative;
-      z-index: 2;
-    }
-
-    .description-section h2 {
-      font-size: 31px;
-      color: var(--accent-color);
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .description-section p {
-      font-size: 20px;
-      line-height: 1.5;
-    }
-
-    /* Социальные кнопки (общие) */
-    .social-buttons-section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .social-buttons-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .social-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      font-size: 18px;
-      background: var(--accent-color);
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .social-button:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-    }
-
-    /* Видео продукты */
-    .video-container {
-      max-width: 90%;
-      margin: 40px auto;
-      padding: 50px 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .video-container h2 {
-      font-size: 33px;
-      color: var(--accent-color);
-    }
-
-    .video-list {
-      display: flex;
-      gap: 30px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .video-card {
-      position: relative;
-      display: inline-block;
-    }
-
-    .video-list video {
-      width: 300px;
-      height: 550px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .video-card video:hover {
-      transform: scale(1.05);
-    }
-
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 20px;
-    }
-
-    .video-card:hover .video-overlay {
-      opacity: 1;
-    }
-
-    .video-overlay p {
-      margin: 10px 0;
-      font-size: 16px;
-    }
-
-    .download-btn {
-      background: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
-      transition: background 0.3s ease;
-    }
-
-    .download-btn:hover {
-      background: var(--accent-hover);
-    }
-
-    /* Секция сравнения выплат */
-    .comparison-section {
-      width: 100%;
-      margin: 40px 0;
-      /* убраны авто-отступы по горизонтали */
-      padding: 30px 20px;
-      /* добавлен отступ по бокам для комфорта просмотра */
-      text-align: center;
-      background: var(--comparison-bg);
-      border: 2px solid var(--accent-color);
-      /*border-radius: 10px;*/
-      box-sizing: border-box;
-    }
-
-    .comparison-section h2 {
-      font-size: 35px;
-      color: var(--accent-color);
-      margin-bottom: 20px;
-    }
-
-    .comparison-section p {
-      font-size: 22px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .comparison-section ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 20px;
-    }
-
-    .comparison-section ul li {
-      font-size: 20px;
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-
-    .comparison-chart {
-      margin: 20px auto;
-      display: block;
-    }
-
-    .comparison-chart rect {
-      transform-origin: bottom;
-      transform: scaleY(0);
-      animation: growBar 1.5s forwards;
-    }
-
-    .comparison-chart rect:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-
-    .comparison-chart rect:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-
-    .comparison-chart rect:nth-child(3) {
-      animation-delay: 0.6s;
-    }
-
-    .comparison-chart rect:nth-child(4) {
-      animation-delay: 0.8s;
-    }
-
-    .comparison-chart rect.winner {
-      animation: growBar 1.5s forwards, pulse 2s 1.6s infinite;
-    }
-
-    @keyframes growBar {
-      from {
-        transform: scaleY(0);
-      }
-
-      to {
-        transform: scaleY(1);
-      }
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scaleY(1);
-      }
-
-      50% {
-        transform: scaleY(1.05);
-      }
-
-      100% {
-        transform: scaleY(1);
-      }
-    }
-
-    /* Стили для RoadMap (общие) */
-    .roadmap-section {
-      margin: 80px auto;
-      max-width: 600px;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-    }
-
-    .roadmap-container {
-      position: relative;
-      padding: 50px 0;
-    }
-
-    .roadmap-svg {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .roadmap-svg path {
-      stroke: var(--accent-color);
-      stroke-width: 4;
-      fill: none;
-    }
-
-    .roadmap-steps {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .roadmap-step {
-      background: var(--card-bg);
-      border-radius: 10px;
-      padding: 20px;
-      width: 300px;
-      margin: 40px 0;
-      position: relative;
-      overflow: visible;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: transform 0.3s, opacity 0.5s;
-    }
-
-    /* Простой островок под шагом */
-    .roadmap-step::before {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 20px;
-      background: var(--accent-color);
-      border-radius: 50%;
-      z-index: -1;
-    }
-
-    .roadmap-step.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .roadmap-step h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      color: var(--accent-color);
-      font-family: 'PT Serif', serif;
-    }
-
-    .roadmap-step p {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.4;
-      color: var(--text-color);
-    }
-
-    /* Улучшения для тёмного режима */
-    [data-theme="dark"] .roadmap-step {
-      /* Для повышения контраста добавляем светлую обводку и немного меняем фон */
-      background: #333333;
-      border: 1px solid #444;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    [data-theme="dark"] .roadmap-step::before {
-      /* Меняем оттенок декоративного островка */
-      background: #2ecc71;
-    }
-
-    [data-theme="dark"] .roadmap-svg path {
-      /* Можно немного усилить яркость линии */
-      stroke: #2ecc71;
-    }
-
-
-    /* Предложения для компаний и блогеров */
-    .offers-section {
-      max-width: 1000px;
-      margin: 80px auto;
-      padding: 0 20px;
-      text-align: center;
-    }
-
-    .offers-section h2 {
-      font-size: 33px;
-      color: var(--accent-color);
-      margin-bottom: 30px;
-    }
-
-    .offers-container {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .offer {
-      flex: 1;
-      min-width: 300px;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: left;
-    }
-
-    .offer h3 {
-      color: var(--accent-color);
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
-
-    .offer p {
-      font-size: 18px;
-      line-height: 1.4;
-      color: var(--text-color);
-    }
-
-    .offer-button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 25px;
-      font-size: 18px;
-      background: transparent;
-      color: var(--accent-color);
-      border: 2px solid var(--accent-color);
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .offer-button:hover {
-      background: var(--accent-color);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    /* Партнеры */
-    .partners-section {
-      padding: 80px 20px;
-      background: var(--footer-bg);
-      color: var(--footer-text);
-    }
-
-    .partners-section h2 {
-      font-size: 33px;
-      color: var(--accent-color);
-      margin-bottom: 30px;
-    }
-
-    .partner-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .partner-logo img {
-      width: 150px;
-    }
-
-    /* Футер */
-    .footer {
-      background: var(--footer-bg);
-      color: var(--footer-text);
-      padding: 30px;
-      text-align: center;
-    }
-
-    .footer p {
-      font-size: 18px;
-      margin: 5px 0;
-    }
-
-    .social-links {
-      margin-top: 20px;
-    }
-
-    .social-links a {
-      margin: 0 10px;
-      color: var(--footer-text);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .social-links a:hover {
-      color: var(--accent-color);
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        margin: 10px 0;
-      }
-
-      .roadmap-step {
-        width: 90%;
-      }
-
-      .offers-container {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-    /* Общие медиазапросы для мобильных устройств */
-@media screen and (max-width: 768px) {
-  /* Шапка */
-  nav {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 15px;
-  }
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-  }
-  .nav-right {
-    margin-right: 0; /* Убираем правый отступ */
-    margin-top: 10px;
-  }
-  .logo {
-    font-size: 32px; /* Подбирайте нужный размер */
-  }
-  .logo a {
-    font-size: inherit;
-  }
-  
-  /* Секция "Сравнение выплат" */
-  .comparison-section {
-    width: 100%;
-    margin: 20px 0;         /* Уменьшаем вертикальные отступы */
-    padding: 20px 15px;      /* Добавляем боковые отступы для читаемости */
-    box-sizing: border-box; /* Чтобы отступы учитывались в ширине */
-  }
-  
-  /* Текст и диаграмма внутри "Сравнение выплат" */
-  .comparison-section h2 {
-    font-size: 28px;
-  }
-  .comparison-section p,
-  .comparison-section ul li,
-  .comparison-section text {
-    font-size: 16px;
-  }
-  
-  /* При необходимости можно уменьшить размеры SVG-диаграммы */
-  .comparison-chart {
-    max-width: 100%;
-    height: auto;
-  }
-}
-
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valerius Weichel — Finanzierung für Unternehmen | DV Finanzierung</title>
+    <meta name="description" content="Valerius Weichel – Experte für strukturierte Unternehmensfinanzierung in Deutschland. Maßgeschneiderte Finanzierungslösungen für Firmen und Unternehmer über DV Finanzierung." />
+    <meta name="keywords" content="Valerius Weichel, DV Finanzierung, Unternehmensfinanzierung, Firmenfinanzierung, strukturierte Finanzierung, Liquidität, Kapital, Finanzierungslösungen, Firmenkredit, Deutschland, Geschäft, Wachstum, Finanzierung, Partner, Beratung, Valerius, Weichel, DVAG, Deutsche Vermögensberatung, Finanzierung Plus, Firmenkunden, Finanzierungsexperte, Valerius Weichel Finanzierung" />
+    <link rel="canonical" href="https://valerius-weichel.github.io/" />
+    <meta property="og:title" content="Valerius Weichel — Finanzierung für Unternehmen | DV Finanzierung" />
+    <meta property="og:description" content="Professionelle Finanzierungslösungen für Unternehmen in Deutschland. Individuelle Beratung und effiziente Kapitalbeschaffung für den Mittelstand." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://valerius-weichel.github.io/" />
+    <meta property="og:image" content="https://valerius-weichel.github.io/og-image.jpg" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts (Luxury) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 4 & FontAwesome CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --main-bg: #18191a;
+            --card-bg: #232426ee;
+            --text-main: #e5e4e2;
+            --text-title: #fff;
+            --accent: #bfa97a;
+            --accent-hover: #e0c785;
+            --border: #353637;
+            --lux-shadow: 0 12px 32px 0 #000a;
+        }
+        html, body {
+            margin:0; padding:0; background:var(--main-bg); color:var(--text-main);
+            font-family: 'Inter', Arial, sans-serif; min-height: 100vh;
+        }
+        /* FONOVOE LUX SVG */
+        body::before {
+            content: "";
+            position: fixed;
+            z-index: 0;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: 
+              linear-gradient(130deg, #000b 0%, #232426cc 100%),
+              url('data:image/svg+xml;utf8,<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="%23fffbe8" stop-opacity="0.28"/><stop offset="80%" stop-color="%23bfa97a" stop-opacity="0.38"/></linearGradient></defs><g stroke="url(%23gold)" stroke-width="1.2" opacity="0.34"><path d="M0 200Q480 450 960 200T1920 200"/><path d="M0 350Q480 100 960 350T1920 350"/><path d="M0 550Q480 800 960 550T1920 550"/><path d="M0 700Q480 450 960 700T1920 700"/><path d="M0 950Q480 1200 960 950T1920 950"/></g></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            animation: bgmove 14s linear infinite alternate;
+        }
+        @keyframes bgmove {
+            0% { background-position: 60% 0%; }
+            100% { background-position: 40% 100%; }
+        }
+
+        .content-root { position:relative; z-index:2; }
+        .navbar { background: transparent; border-bottom:1.5px solid var(--border);}
+        .navbar-brand, .nav-link { color: var(--text-title) !important; letter-spacing: 1px;}
+        .navbar-nav .nav-link { transition: color .2s; font-weight:500;}
+        .navbar-nav .nav-link:hover { color: var(--accent) !important;}
+        .hero {
+            min-height: 85vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; padding-top: 100px; padding-bottom: 50px;
+            position:relative;
+        }
+        .hero::after {
+            content:""; z-index:1;
+            position:absolute; left:0; top:0; width:100%; height:100%;
+            background: linear-gradient(115deg, #18191a 65%, #232426a0 100%);
+            pointer-events:none;
+        }
+        .hero > .container { position:relative; z-index:2;}
+        .hero-title {
+            font-size: 3rem; font-weight: 700;
+            color: var(--accent); margin-bottom: 20px;
+            line-height: 1.1; letter-spacing: 1.5px;
+            text-shadow: 0 2px 32px #0007;
+            opacity:0; transform:translateY(30px); animation:fadein 1.5s .1s both;
+        }
+        .hero-sub {
+            font-size: 1.3rem; margin-bottom: 34px;
+            color: var(--text-main); font-weight: 500;
+            max-width: 600px; margin-left:auto; margin-right:auto;
+            opacity:0; transform:translateY(50px); animation:fadein 1.6s .5s both;
+        }
+        .btn-main {
+            background: var(--accent); color:var(--main-bg); border:none;
+            font-weight:700; padding:14px 38px; border-radius:25px;
+            transition:.23s; box-shadow:0 4px 24px #0005;
+            font-size:1.15rem; letter-spacing:1px;
+            opacity:0; transform:translateY(50px); animation:fadein 1.3s 1.2s both;
+        }
+        .btn-main:hover { background:var(--accent-hover); color:var(--main-bg);}
+        @keyframes fadein {
+            from { opacity:0; transform:translateY(40px);}
+            to { opacity:1; transform:translateY(0);}
+        }
+        .section-title {
+            font-size:2.05rem; margin-bottom:30px; color:var(--accent);
+            font-weight:700; text-align:center;
+            letter-spacing:1.2px;
+            font-family: 'Playfair Display', serif;
+            text-shadow:0 1px 18px #0003;
+        }
+        .card {
+            background: var(--card-bg); border:1.5px solid var(--border);
+            border-radius:20px; box-shadow: var(--lux-shadow);
+            margin-bottom:32px; transition: transform .26s cubic-bezier(.27,.84,.4,1.12), box-shadow .26s;
+            position:relative; z-index:2;
+        }
+        .card:hover {
+            transform: translateY(-9px) scale(1.03);
+            box-shadow: 0 18px 50px #000c;
+            border-color: var(--accent);
+        }
+        .platform-icon { font-size:38px; color: var(--accent); margin-bottom:12px;}
+        .section { padding: 64px 0; position:relative;}
+        .section::before {
+            content:""; position:absolute; inset:0;
+            background: linear-gradient(117deg, #22242680 55%, #bfa97a18 100%);
+            pointer-events:none; z-index:1;
+        }
+        .section > .container, .section > .container > .row {
+            position:relative; z-index:2;
+        }
+        .social-icons {
+            text-align:center; margin-top:12px;
+        }
+        .social-icons a {
+            margin:0 13px; font-size: 22px; color: var(--text-main); transition: color .18s; display:inline-block;
+        }
+        .social-icons a:hover { color:var(--accent);}
+        .footer {
+            background: var(--card-bg); padding: 28px 0 12px 0; text-align:center;
+            border-top:1.2px solid var(--border);
+            font-family: 'Inter', Arial, sans-serif;
+            font-size:1.08rem;
+            position:relative; z-index:2;
+        }
+        label { color:var(--accent); font-weight:500;}
+        .form-control {
+            background:var(--main-bg); color:var(--text-main);
+            border:1px solid var(--border); border-radius: 9px;
+        }
+        .form-control:focus { border-color:var(--accent); background:var(--main-bg); color:var(--text-title);}
+        ::placeholder { color:#b5b3ae; opacity:0.92;}
+        .card, .card .p-4, .card .text-center, .card .h-100 {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+        }
+        .section .row {
+            justify-content: center;
+        }
+        @media(max-width: 991px) {
+            .section { padding: 36px 0;}
+            .hero { padding-top: 70px;}
+        }
+        @media(max-width: 767px) {
+            .hero-title { font-size:1.45rem;}
+            .hero-sub { font-size:.99rem;}
+            .section-title { font-size:1.09rem;}
+            .card { margin-bottom:18px;}
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Навигация -->
-  <nav>
-    <div class="logo" id="nav-logo">
-      <a href="#top" style="text-decoration: none; color: inherit;">TokFlare</a>
+    <!-- Luxury Background Pattern & Fading Effects -->
+    <div class="content-root">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Valerius Weichel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="color:var(--accent);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Startseite</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Über mich</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Leistungen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-title">Unternehmensfinanzierung<br>in Deutschland</div>
+            <div class="hero-sub">Strukturiert. Persönlich. Effizient.<br>Finanzierungslösungen für Firmen über DV Finanzierung</div>
+            <a href="#contact" class="btn btn-main mt-2">Beratung anfragen</a>
+        </div>
+    </section>
+
+    <!-- Über mich -->
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">Über Valerius Weichel</h2>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-4 col-md-5 mb-4 mb-md-0 text-center">
+                <div style="
+                    display:inline-block; 
+                    border-radius:28px; 
+                    overflow:hidden;
+                    box-shadow:0 6px 32px #0008, 0 0 0 6px #bfa97a55;">
+                    <img src="img/me.jpg" alt="Valerius Weichel" 
+                        style="width:100%; max-width:270px; display:block; border-radius:28px; filter:brightness(0.98) contrast(1.04);" />
+                </div>
+                <a href="https://www.linkedin.com/in/valerius-weichel/" target="_blank"
+                   class="btn btn-main mt-3" style="font-size:1rem; padding:10px 24px;">
+                    <i class="fab fa-linkedin mr-1"></i> LinkedIn-Profil ansehen
+                </a>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="card p-4" style="background:rgba(35,36,38,0.97);">
+                    <p>
+                        Ich bin Valerius Weichel – Spezialist für strukturierte Unternehmensfinanzierung in Deutschland.<br><br>
+                        Mein Fokus: passgenaue Finanzierungslösungen für Unternehmen, den Mittelstand und wachstumsorientierte Firmen.
+                        Durch strategische Partnerschaften mit <b>DV Finanzierung</b> ermögliche ich effiziente Kapitalbeschaffung – 
+                        von Liquiditätssteigerung bis zu nachhaltigem Wachstum.<br><br>
+                        Ihr Vorteil: absolute Diskretion, schnelle Prozesse, individuelle Begleitung. Klare Strukturen für nachhaltigen Unternehmenserfolg.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="nav-links">
-      <a href="#about" id="nav-about">О нас</a>
-      <a href="register.html" id="nav-register">Регистрация</a>
-      <a href="advertisers.html" id="nav-advertisers">Для компаний</a>
-      <a href="contact.html" id="nav-contacts">Контакты</a>
-    </div>
-    <div class="nav-right">
-      <button class="theme-switcher" onclick="toggleTheme()">🌙/☀</button>
-      <button class="lang-switcher" id="langSwitcher" onclick="toggleLanguage()">DE</button>
-    </div>
-  </nav>
-
-  <!-- Главный экран (баннер) -->
-  <section class="hero-section">
-    <!-- Декоративные картинки (доллар и TikTok) -->
-    <div class="hero-decorations">
-      <img src="dollar.png" alt="Dollar Decoration" class="decor-dollar">
-      <img src="tiktok.png" alt="TikTok Decoration" class="decor-tiktok">
-    </div>
-
-    <h1>TokFlare</h1>
-
-    <p>
-      TokFlare – это независимая платформа, где бренды и блогеры создают мощный контент для TikTok.
-      Бизнес получает рекламу с гарантированными результатами – оплата только за просмотры, лайки и комментарии.
-      Блогеры монетизируют творчество без лишних заморочек: берём готовые материалы, снимаем, зарабатываем.
-      Всё просто, честно и выгодно!
-    </p>
-
-    <a href="#about" class="cta-button">
-      Узнать больше
-    </a>
-
-    <!-- Иконки в баннере -->
-    <div class="hero-socials"
-      style="margin-top: 30px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-      <!-- E-mail -->
-      <a href="mailto:support@tokflare.com" class="social-button"
-        style="background: #fff; color: var(--accent-color); border: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-          <path fill="currentColor" d="M502.3 190.8l-192-160c-20.2-16.8-50.2-16.8-70.4 
-            0l-192 160C12.7 202.7 0 226.5 0 251.2V448c0 
-            35.3 28.7 64 64 64h384c35.3 0 64-28.7 
-            64-64V251.2c0-24.7-12.7-48.5-29.7-60.4zM464 
-            448H48V251.2l208-173.3 208 
-            173.3V448z" />
-        </svg>
-        E-mail
-      </a>
-      <!-- WhatsApp -->
-      <a href="https://wa.me/123456789" class="social-button" target="_blank"
-        style="background: #fff; color: var(--accent-color); border: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20">
-          <path fill="currentColor" d="M380.9 97.1C339-7.9 226.7-26.6 
-            134.3 26.7 80.1 59.8 47.4 117.4 48 
-            176.3c.6 39.8 10.1 76.1 29.6 
-            109.3L.1 511.9l128.4-33.7c30.9 
-            17 66.5 26.1 102.2 26.1 85.8 0 
-            157.5-69.8 157.5-155.5 0-43.8-18.8-85.5-51.3-113.6zM368 
-            285.2c-20.3 20.1-46.7 31.1-74.5 
-            31.1-38.2 0-74.7-22.6-90.1-59.8-15.4-37.1-5.3-78.7 
-            21.3-106.8 20.4-21.1 50.2-32.9 
-            80.7-32.9 27.2 0 53.4 9.3 
-            72.8 26.1 14.1 13.2 22.5 30.7 
-            22.5 48.6 0 3.2-.3 6.4-1 
-            9.5-1.3 6.2-3.4 12.2-6.2 
-            17.8-4.2 8.8-10.1 16.4-17.2 
-            22.6-9.1 7.9-20.3 12.4-32.1 
-            12.4-2.1 0-4.3-.2-6.4-.4-8.2-.7-16.1-2.9-23.6-6.2-4.8-2.3-8.7-5.3-11.6-8.8-1.8-2.3-3.3-4.8-4.4-7.5-2.6-6.5-3.8-13.5-3.8-20.6 
-            0-6.3 1.1-12.5 3.4-18.3 
-            2.1-5 5.3-9.3 9.2-12.8 4.8-3.9 
-            10.7-6.7 17.2-8.3 3.7-.9 
-            7.5-1.4 11.4-1.4 7.2 0 
-            14.3 2.2 20.6 6.4 6.8 4.6 
-            12.4 10.6 16.2 17.7 4.2 8.8 
-            6.6 18.7 6.6 28.8 0 1.7-.1 
-            3.4-.2 5.1-.2 4.7-.8 9.3-1.7 
-            13.8-1 5.1-2.4 10-4.2 14.7z" />
-        </svg>
-        Whatsapp
-      </a>
-      <!-- Telegram -->
-      <a href="https://t.me/YourTelegram" class="social-button" target="_blank"
-        style="background: #fff; color: var(--accent-color); border: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" width="20" height="20">
-          <path fill="currentColor"
-            d="M248,8C111,8,0,119,0,256c0,137,111,248,248,248s248-111,248-248C496,119,385,8,248,8Zm104.5,169.8-31.3,147.8c-2.4,10.8-8.8,13.5-17.8,8.4l-49.3-36.3-23.8,22.9c-2.6,2.6-4.8,4.8-9.8,4.8l3.5-49.8,90.7-81.8c3.9-3.5-0.8-5.4-6-1.9L152.7,267.8l-46.6-14.6c-10.1-3.1-10.3-10.1,2.2-14.9l181.7-70.1C332,169.1,356.5,182.5,352.5,177.8Z" />
-        </svg>
-        Telegram
-      </a>
-      <!-- Discord -->
-      <a href="https://discord.gg/YourDiscord" class="social-button" target="_blank"
-        style="background: #fff; color: var(--accent-color); border: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="20" height="20">
-          <path fill="currentColor"
-            d="M524.6 85.1C492.5 64.3 456.6 48 418 
-            37.7c-20.8-7.6-41.2-11.6-61.3-13.3C342.1 20.1 
-            324.1 16 306.1 16c-18 0-36 4.1-50.6 8.4-20.1 1.7-40.5 5.8-61.3 13.3-38.6 10.4-74.5 26.8-106.6 47.4-80.7 55.6-112.5 131.2-112.5 131.2-8.3 10.2-12.9 22.6-12.9 35.1 0 39.7 18.4 72 18.4 72l13.3-9.3c19.1-13.2 36.4-26.9 50.6-40.5-0.7-0.2-1.4-0.4-2.2-0.6-27.3-7.3-52.2-11.9-75.2-14.4-3.2-0.4-6.4 1.6-7.2 4.6-7.5 30.1-10.6 61.3-10.6 93.6 0 12.5 4.6 24.9 12.9 35.1 0 0 31.8 75.7 112.5 131.2 32.1 20.6 67.9 37 106.6 47.4 20.8 7.6 41.2 11.6 61.3 13.3 14.6 4.2 32.6 8.4 50.6 8.4 18 0 36-4.1 50.6-8.4 20.1-1.7 40.5-5.8 61.3-13.3 38.6-10.4 74.5-26.8 106.6-47.4 80.7-55.6 112.5-131.2 112.5-131.2 8.3-10.2 12.9-22.6 12.9-35.1 0-39.7-18.4-72-18.4-72s-31.8 75.7-112.5 131.2zM256 338c-35.3 0-64-28.7-64-64 0-35.3 28.7-64 64-64s64 28.7 64 64C320 309.3 291.3 338 256 338zm128 0c-35.3 0-64-28.7-64-64 0-35.3 28.7-64 64-64s64 28.7 64 64C448 309.3 419.3 338 384 338z" />
-        </svg>
-        Discord
-      </a>
-      <a href="mailto:support@tokflare.com" class="social-button">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-          <path fill="currentColor" d="M502.3 190.8l-192-160c-20.2-16.8-50.2-16.8-70.4 
-            0l-192 160C12.7 202.7 0 226.5 0 
-            251.2V448c0 35.3 28.7 64 
-            64 64h384c35.3 0 64-28.7 
-            64-64V251.2c0-24.7-12.7-48.5-29.7-60.4zM464 
-            448H48V251.2l208-173.3 208 
-            173.3V448z" />
-        </svg>
-        E-mail
-      </a>
-    </div>
-  </section>
-
-  <!-- Описание платформы -->
-  <section class="description-section" id="about">
-    <h2 id="platform-heading">Описание платформы</h2>
-    <p id="platform-text">
-      TokFlare – это независимый портал, который соединяет блогеров и компании для создания контента в TikTok.
-      Платформа позволяет блогерам брать рекламные материалы компаний и создавать на их основе видео, получая оплату
-      только при достижении определенных показателей (просмотры, лайки, комментарии). Это обеспечивает бизнесу
-      гарантированную эффективность рекламы, а блогерам – дополнительный доход.
-    </p>
-  </section>
-
-  <!-- Видео продукты с карточками и оверлеем -->
-  <section class="video-container">
-    <h2 id="products-heading">Наши актуальные продукты</h2>
-    <div class="video-list">
-      <div class="video-card">
-        <video controls poster="1.jpg">
-          <source src="video1.mp4" type="mp4">
-        </video>
-        <div class="video-overlay">
-          <p>Условия: 100€ за 100 000 просмотров</p>
-          <a href="video1.mp4" class="download-btn" download>Скачать</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls poster="2.jpg">
-          <source src="video1.mp4" type="mp4">
-        </video>
-        <div class="video-overlay">
-          <p>Условия: 100€ за 100 000 просмотров</p>
-          <a href="video1.mp4" class="download-btn" download>Скачать</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls poster="1.jpg">
-          <source src="video1.mp4" type="mp4">
-        </video>
-        <div class="video-overlay">
-          <p>Условия: 100€ за 100 000 просмотров</p>
-          <a href="video1.mp4" class="download-btn" download>Скачать</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls poster="2.jpg">
-          <source src="video1.mp4" type="mp4">
-        </video>
-        <div class="video-overlay">
-          <p>Условия: 100€ за 100 000 просмотров</p>
-          <a href="video1.mp4" class="download-btn" download>Скачать</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Секция сравнения выплат с диаграммой -->
-  <section class="comparison-section">
-    <h2 id="comparison-heading">Сравнение выплат</h2>
-    <p id="comparison-text">
-      Наша платформа выплачивает 1 евро за 1000 просмотров – то есть 100 евро за 100 000 просмотров.
-    </p>
-    <svg class="comparison-chart" width="800" height="220">
-      <rect class="winner" x="50" y="20" width="150" height="180" rx="10" ry="10" fill="#27ae60"></rect>
-      <text x="125" y="15" font-size="16" fill="var(--text-color)" text-anchor="middle">100€</text>
-      <text x="125" y="215" font-size="16" fill="var(--text-color)" text-anchor="middle">TokFlare</text>
-
-      <rect x="230" y="164" width="150" height="36" rx="10" ry="10" fill="#4285F4"></rect>
-      <text x="305" y="158" font-size="16" fill="var(--text-color)" text-anchor="middle">10–30€</text>
-      <text x="305" y="215" font-size="16" fill="var(--text-color)" text-anchor="middle">Google Ads</text>
-
-      <rect x="410" y="137" width="150" height="63" rx="10" ry="10" fill="#1877F2"></rect>
-      <text x="485" y="132" font-size="16" fill="var(--text-color)" text-anchor="middle">20–50€</text>
-      <text x="485" y="215" font-size="16" fill="var(--text-color)" text-anchor="middle">Meta Business</text>
-
-      <rect x="590" y="177" width="150" height="23" rx="10" ry="10" fill="#EE1D52"></rect>
-      <text x="665" y="173" font-size="16" fill="var(--text-color)" text-anchor="middle">5–20€</text>
-      <text x="665" y="215" font-size="16" fill="var(--text-color)" text-anchor="middle">TikTok</text>
-    </svg>
-
-
-    <p id="comparison-bonus" style="font-size: 20px; margin-top: 20px;">
-      Более того, чем дольше вы сотрудничаете с нами как блогер, тем выше ваш ранг – это может повысить выплаты
-      дополнительно на 1,15%–1,30%.
-    </p>
-  </section>
-
-  <!-- Roadmap-секция -->
-  <section class="roadmap-section">
-    <h2 id="roadmap-heading">Roadmap: Как мы работаем</h2>
-    <div class="roadmap-container">
-      <svg class="roadmap-svg" viewBox="0 0 4 600" preserveAspectRatio="none">
-        <path d="M2,0 L2,600" />
-      </svg>
-      <div class="roadmap-steps">
-        <div class="roadmap-step">
-          <div class="island">
-            <h3 id="roadmap-step-1-title">1. Регистрация</h3>
-            <p id="roadmap-step-1-text">Заполните анкету, подтвердите почту и получите доступ к личному кабинету.</p>
-          </div>
-        </div>
-        <div class="roadmap-step">
-          <div class="island">
-            <h3 id="roadmap-step-2-title">2. Выбор ролика</h3>
-            <p id="roadmap-step-2-text">Изучите каталог и выберите продукт, соответствующий вашему стилю.</p>
-          </div>
-        </div>
-        <div class="roadmap-step">
-          <div class="island">
-            <h3 id="roadmap-step-3-title">3. Получение задания</h3>
-            <p id="roadmap-step-3-text">Получите подробные инструкции и рекламные материалы от компании.</p>
-          </div>
-        </div>
-        <div class="roadmap-step">
-          <div class="island">
-            <h3 id="roadmap-step-4-title">4. Создание контента</h3>
-            <p id="roadmap-step-4-text">Снимите ролик, проявив креативность и индивидуальность.</p>
-          </div>
-        </div>
-        <div class="roadmap-step">
-          <div class="island">
-            <h3 id="roadmap-step-5-title">5. Публикация</h3>
-            <p id="roadmap-step-5-text">Опубликуйте видео на своей платформе и поделитесь им с аудиторией.</p>
-          </div>
-        </div>
-        <div class="roadmap-step">
-          <div class="island">
-            <h3 id="roadmap-step-6-title">6. Анализ и выплата</h3>
-            <p id="roadmap-step-6-text">На основе активности (просмотры, лайки, комментарии) получите заслуженную
-              выплату.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .roadmap-step {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      margin: 40px 0;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: transform 0.5s, opacity 0.5s;
-    }
-
-    .roadmap-step.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .island {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      text-align: center;
-      position: relative;
-    }
-
-    .island::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 50px;
-      background: var(--accent-color);
-      border-radius: 50%;
-      z-index: -1;
-    }
-  </style>
-
-  <script>
-    let currentLanguage = "ru";
-    const translations = {
-      ru: {
-        nav: {
-          about: "О нас",
-          register: "Регистрация",
-          advertisers: "Для компаний",
-          contacts: "Контакты"
-        },
-        hero: {
-          title: "TokFlare",
-          description: "Платформа, объединяющая блогеров и бренды для создания эффективного контента в <a href='https://www.tiktok.com' target='_blank'><img src='TikTok_logo.png' alt='TikTok' style='height: 1.2em; vertical-align: middle;'></a>.",
-          cta: "Узнать больше"
-        },
-        platformDescription: {
-          heading: "Описание платформы",
-          text: "TokFlare – это независимый портал, который соединяет блогеров и компании для создания контента в TikTok. Платформа позволяет блогерам брать рекламные материалы компаний и создавать на их основе видео, получая оплату только при достижении определенных показателей (просмотры, лайки, комментарии). Это обеспечивает бизнесу гарантированную эффективность рекламы, а блогерам – дополнительный доход."
-        },
-        productsHeading: "Наши актуальные продукты",
-        roadmap: {
-          heading: "Roadmap: Как мы работаем",
-          steps: [
-            { title: "Регистрация", text: "Заполните анкету, подтвердите почту и получите доступ к личному кабинету." },
-            { title: "Выбор ролика", text: "Изучите каталог и выберите продукт, соответствующий вашему стилю." },
-            { title: "Получение задания", text: "Получите подробные инструкции и рекламные материалы от компании." },
-            { title: "Создание контента", text: "Снимите ролик, проявив креативность и индивидуальность." },
-            { title: "Публикация", text: "Опубликуйте видео на своей платформе и поделитесь им с аудиторией." },
-            { title: "Анализ и выплата", text: "На основе активности (просмотры, лайки, комментарии) получите заслуженную выплату." }
-          ]
-        },
-        offers: {
-          heading: "Наши предложения",
-          companies: {
-            title: "Для компаний",
-            text: "Мы предлагаем комплексное продвижение бренда с помощью профессиональных блогеров, гарантированный охват аудитории и прозрачные условия сотрудничества.",
-            button: "Для компаний"
-          },
-          bloggers: {
-            title: "Для блогеров",
-            text: "Мы предоставляем высокие выплаты, стабильные задания и возможность работать с крупными брендами, обеспечивая достойный доход за творчество.",
-            button: "Регистрация"
-          }
-        },
-        partners: "Наши партнеры",
-        footer: {
-          rights: "Все права защищены.",
-          email: "Email:",
-          phone: "Телефон:"
-        }
-      },
-      de: {
-        nav: {
-          about: "Über uns",
-          register: "Registrierung",
-          advertisers: "Für Unternehmen",
-          contacts: "Kontakt"
-        },
-        hero: {
-          title: "TokFlare",
-          description: "Plattform, die Blogger und Marken für die Erstellung effektiver Inhalte auf <a href='https://www.tiktok.com' target='_blank'><img src='TikTok_logo.png' alt='TikTok' style='height: 1.2em; vertical-align: middle;'></a> vereint.",
-          cta: "Mehr erfahren"
-        },
-        platformDescription: {
-          heading: "Plattformbeschreibung",
-          text: "TokFlare ist ein unabhängiges Portal, das Blogger und Unternehmen für die Erstellung von Inhalten auf TikTok verbindet. Die Plattform ermöglicht es Bloggern, Werbematerialien von Unternehmen zu verwenden und daraus Videos zu erstellen, wobei die Bezahlung nur bei Erreichen bestimmter Kennzahlen (Aufrufe, Likes, Kommentare) erfolgt. Dies gewährleistet Unternehmen eine garantierte Werbewirkung und Bloggern ein zusätzliches Einkommen."
-        },
-        productsHeading: "Unsere aktuellen Produkte",
-        roadmap: {
-          heading: "Roadmap: Wie wir arbeiten",
-          steps: [
-            { title: "Registrierung", text: "Füllen Sie das Formular aus, bestätigen Sie Ihre E-Mail und erhalten Sie Zugang zum persönlichen Konto." },
-            { title: "Auswahl des Videos", text: "Durchsuchen Sie den Katalog und wählen Sie ein Produkt, das zu Ihrem Stil passt." },
-            { title: "Auftrag erhalten", text: "Erhalten Sie detaillierte Anweisungen und Werbematerialien vom Unternehmen." },
-            { title: "Inhalt erstellen", text: "Erstellen Sie ein Video mit Kreativität und Individualität." },
-            { title: "Veröffentlichung", text: "Veröffentlichen Sie das Video auf Ihrer Plattform und teilen Sie es mit Ihrem Publikum." },
-            { title: "Analyse und Auszahlung", text: "Erhalten Sie basierend auf Aktivität (Aufrufe, Likes, Kommentare) die verdiente Auszahlung." }
-          ]
-        },
-        offers: {
-          heading: "Unsere Angebote",
-          companies: {
-            title: "Für Unternehmen",
-            text: "Wir bieten umfassende Markenförderung mit professionellen Bloggern, garantierte Reichweite und transparente Kooperationsbedingungen.",
-            button: "Für Unternehmen"
-          },
-          bloggers: {
-            title: "Für Blogger",
-            text: "Wir bieten hohe Zahlungen, stabile Aufträge und die Möglichkeit, mit großen Marken zu arbeiten, um ein angemessenes Einkommen für Ihre Kreativität zu gewährleisten.",
-            button: "Registrierung"
-          }
-        },
-        partners: "Unsere Partner",
-        footer: {
-          rights: "Alle Rechte vorbehalten.",
-          email: "E-Mail:",
-          phone: "Telefon:"
-        }
-      }
-    };
-
-    function updateContent() {
-      const t = translations[currentLanguage];
-      document.getElementById("nav-about").textContent = t.nav.about;
-      document.getElementById("nav-register").textContent = t.nav.register;
-      document.getElementById("nav-advertisers").textContent = t.nav.advertisers;
-      document.getElementById("nav-contacts").textContent = t.nav.contacts;
-
-      // Если нужны дополнительные элементы в hero-секции, можно обновить их здесь
-      // Например, если добавить id="hero-description" или "cta-button", обновляем innerHTML/textContent
-
-      document.getElementById("platform-heading").textContent = t.platformDescription.heading;
-      document.getElementById("platform-text").textContent = t.platformDescription.text;
-      document.getElementById("products-heading").textContent = t.productsHeading;
-      document.getElementById("roadmap-heading").textContent = t.roadmap.heading;
-
-      const steps = t.roadmap.steps;
-      for (let i = 0; i < steps.length; i++) {
-        document.getElementById(`roadmap-step-${i + 1}-title`).textContent = (i + 1) + ". " + steps[i].title;
-        document.getElementById(`roadmap-step-${i + 1}-text`).textContent = steps[i].text;
-      }
-
-      document.getElementById("offers-heading").textContent = t.offers.heading;
-      document.getElementById("offer-companies-title").textContent = t.offers.companies.title;
-      document.getElementById("offer-companies-text").textContent = t.offers.companies.text;
-      document.getElementById("offer-companies-button").textContent = t.offers.companies.button;
-      document.getElementById("offer-bloggers-title").textContent = t.offers.bloggers.title;
-      document.getElementById("offer-bloggers-text").textContent = t.offers.bloggers.text;
-      document.getElementById("offer-bloggers-button").textContent = t.offers.bloggers.button;
-      document.getElementById("partners-heading").textContent = t.partners;
-      document.getElementById("footer-rights").textContent = t.footer.rights;
-      document.getElementById("footer-email-label").textContent = t.footer.email;
-      document.getElementById("footer-phone-label").textContent = t.footer.phone;
-      document.getElementById("langSwitcher").textContent = currentLanguage === "ru" ? "DE" : "RU";
-    }
-
-    function toggleLanguage() {
-      currentLanguage = currentLanguage === "ru" ? "de" : "ru";
-      updateContent();
-    }
-
-    function toggleTheme() {
-      let currentTheme = document.documentElement.getAttribute('data-theme') || "light";
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute('data-theme', newTheme);
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      updateContent();
-
-      // Анимация появления шагов Roadmap
-      const roadmapSteps = document.querySelectorAll('.roadmap-step');
-      const observerOptions = { threshold: 0.2 };
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, observerOptions);
-      roadmapSteps.forEach(step => observer.observe(step));
-    });
-  </script>
-
-  <!-- Предложения для компаний и блогеров -->
-  <section class="offers-section">
-    <h2 id="offers-heading">Наши предложения</h2>
-    <div class="offers-container">
-      <div class="offer">
-        <h3 id="offer-companies-title">Для компаний</h3>
-        <p id="offer-companies-text">
-          Мы предлагаем комплексное продвижение бренда с помощью профессиональных блогеров, гарантированный охват
-          аудитории и прозрачные условия сотрудничества.
-        </p>
-        <a href="advertisers.html" class="offer-button" id="offer-companies-button">Для компаний</a>
-      </div>
-      <div class="offer">
-        <h3 id="offer-bloggers-title">Для блогеров</h3>
-        <p id="offer-bloggers-text">
-          Мы предоставляем высокие выплаты, стабильные задания и возможность работать с крупными брендами, обеспечивая
-          достойный доход за творчество.
-        </p>
-        <a href="register.html" class="offer-button" id="offer-bloggers-button">Регистрация</a>
-      </div>
-    </div>
-  </section>
-
-<!-- Партнеры -->
-<section class="partners-section">
-  <h2 id="partners-heading">Наши партнеры</h2>
-  <div class="partner-logo">
-    <a href="https://www.dvag.com" target="_blank">
-      <img src="DVAG.png" alt="DVAG">
-    </a>
-  </div>
 </section>
 
-<!-- Футер -->
-<footer class="footer">
-  <p>
-    &copy; 2025 TokFlare. <span id="footer-rights">Все права защищены.</span>
-    Разработано: <a href="https://eric-lebedenko.github.io/" target="_blank" style="color: inherit; text-decoration: none;">Eric Lebedenko</a>
-  </p>
-  <p>
-    <span id="footer-email-label">Email:</span> support@tokflare.com |
-    <span id="footer-phone-label">Телефон:</span> +49 179 472 42 10
-  </p>
-  <div class="social-links">
-    <a href="https://wa.me/123456789" target="_blank">Whatsapp</a>
-    <a href="https://t.me/YourTelegram" target="_blank">Telegram</a>
-    <a href="https://discord.gg/YourDiscord" target="_blank">Discord</a>
-    <a href="mailto:support@tokflare.com">E-mail</a>
-  </div>
-</footer>
-</body>
 
+    <!-- Leistungen -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Leistungen & Schwerpunkte</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                    <div class="card text-center p-4 w-100">
+                        <div class="platform-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <h4 style="color:var(--text-title); font-family:'Playfair Display', serif;">Strukturierte Finanzierung</h4>
+                        <p>
+                            Individuelle Finanzierungskonzepte: Betriebskapital, Investitionen, Expansion und Restrukturierung – ohne klassische Bankenrestriktionen.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                    <div class="card text-center p-4 w-100">
+                        <div class="platform-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <h4 style="color:var(--text-title); font-family:'Playfair Display', serif;">Alternative Liquidität</h4>
+                        <p>
+                            Zugang zu exklusiven DV Finanzierung-Produkten: Factoring, Sale-and-Lease-Back, kurzfristige Liquidität – schnell, diskret, flexibel.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                    <div class="card text-center p-4 w-100">
+                        <div class="platform-icon"><i class="fas fa-user-tie"></i></div>
+                        <h4 style="color:var(--text-title); font-family:'Playfair Display', serif;">Beratung & Begleitung</h4>
+                        <p>
+                            Persönliche Beratung, umfassende Analyse und professionelle Begleitung – von der Erstberatung bis zur erfolgreichen Kapitalaufnahme.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Kontakt & Beratung</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card p-4">
+                        <form action="mailto:valerius.weichel@dvag.de" method="POST" enctype="text/plain">
+                            <div class="form-group text-left">
+                                <label for="name">Ihr Name</label>
+                                <input type="text" class="form-control" id="name" name="Name" required>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="email">Ihre E-Mail</label>
+                                <input type="email" class="form-control" id="email" name="Email" required>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="message">Ihre Nachricht</label>
+                                <textarea class="form-control" id="message" name="Nachricht" rows="4" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-main">Absenden</button>
+                            </div>
+                        </form>
+                        <div class="mt-3 text-center">
+                            <i class="fas fa-envelope"></i> <a href="mailto:valerius.weichel@dvag.de" style="color:var(--accent);">valerius.weichel@dvag.de</a><br>
+                            <i class="fas fa-phone"></i> <a href="tel:+491794724210" style="color:var(--accent);">+49 179 4724210</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>
+            <span style="color:var(--accent); font-weight:500; font-family:'Playfair Display',serif;">&copy; 2025 Valerius Weichel</span>
+            — Finanzierungspartner für den Mittelstand
+            <div class="social-icons mt-2">
+                <a href="https://www.linkedin.com/in/valerius-weichel/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:valerius.weichel@dvag.de"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+491794724210"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </div>
+    </div> <!-- content-root -->
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
