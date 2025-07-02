@@ -1,321 +1,299 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Valerius Weichel — Finanzierung für Unternehmen | DV Finanzierung</title>
-    <meta name="description" content="Valerius Weichel – Experte für strukturierte Unternehmensfinanzierung in Deutschland. Maßgeschneiderte Finanzierungslösungen für Firmen und Unternehmer über DV Finanzierung." />
-    <meta name="keywords" content="Valerius Weichel, DV Finanzierung, Unternehmensfinanzierung, Firmenfinanzierung, strukturierte Finanzierung, Liquidität, Kapital, Finanzierungslösungen, Firmenkredit, Deutschland, Geschäft, Wachstum, Finanzierung, Partner, Beratung, Valerius, Weichel, DVAG, Deutsche Vermögensberatung, Finanzierung Plus, Firmenkunden, Finanzierungsexperte, Valerius Weichel Finanzierung" />
-    <link rel="canonical" href="https://valerius-weichel.github.io/" />
-    <meta property="og:title" content="Valerius Weichel — Finanzierung für Unternehmen | DV Finanzierung" />
-    <meta property="og:description" content="Professionelle Finanzierungslösungen für Unternehmen in Deutschland. Individuelle Beratung und effiziente Kapitalbeschaffung für den Mittelstand." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://valerius-weichel.github.io/" />
-    <meta property="og:image" content="https://valerius-weichel.github.io/og-image.jpg" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valerius Weichel — Finanzierung für Unternehmen | DV Finanzierung</title>
+  <meta name="description" content="Valerius Weichel – Finanzierungsexperte für Unternehmen. Maßgeschneiderte Finanzierungslösungen und Partner für Wachstum in Deutschland." />
+  <link rel="canonical" href="https://valerius-weichel.github.io/" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --accent: #c2a36b;
+      --accent2: #efefec;
+      --dark: #1a1c1f;
+      --bg: #f8f8f6;
+      --card-bg: #fff;
+      --border: #ebe7df;
+      --shadow: 0 8px 36px 0 #0002;
+    }
+    html, body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+    .navbar {
+      background: var(--card-bg);
+      box-shadow: 0 2px 18px #0001;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--accent)!important;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+    }
+    .nav-link { font-weight:500; color:var(--dark)!important; }
+    .nav-link:hover { color: var(--accent)!important; }
 
-    <!-- Google Fonts (Luxury) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- Bootstrap 4 & FontAwesome CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    .hero {
+      min-height: 88vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative;
+      background:
+        linear-gradient(160deg, #f9f7f2 70%, #e5dac6 100%);
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-bgsvg {
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      opacity:0.18;
+      background: url('data:image/svg+xml;utf8,<svg width="1500" height="800" xmlns="http://www.w3.org/2000/svg"><ellipse cx="900" cy="400" rx="480" ry="250" fill="%23c2a36b" fill-opacity="0.13"/><ellipse cx="600" cy="380" rx="280" ry="110" fill="%23e2cfa2" fill-opacity="0.12"/></svg>') center/cover no-repeat;
+    }
+    .hero-content { z-index:2; position:relative; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: .7rem;
+      letter-spacing: 1.2px;
+      line-height: 1.1;
+      text-shadow: 0 5px 32px #fff8;
+      background: rgba(255,255,255,0.75);
+      border-radius: 16px;
+      padding: 16px 32px 8px 32px;
+      display: inline-block;
+      box-shadow: 0 4px 36px #d7d1c540;
+      margin-top: 50px;
+      /* animation fade-in */
+      opacity:0; transform:translateY(40px); animation:fadein 1.2s .12s both;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #2c2721;
+      max-width: 540px;
+      margin: 0 auto 22px auto;
+      background:rgba(255,255,255,0.7); border-radius:12px;
+      padding:12px 24px;
+      box-shadow:0 1px 18px #eee5;
+      opacity:0; transform:translateY(60px); animation:fadein 1.4s .32s both;
+    }
+    .btn-main {
+      background: var(--accent);
+      color: var(--card-bg);
+      font-weight: 600;
+      border-radius: 32px;
+      padding: 16px 44px;
+      box-shadow: 0 4px 20px #c2a36b25;
+      font-family: 'Playfair Display',serif;
+      font-size: 1.18rem;
+      margin-top: 16px;
+      letter-spacing: 1.1px;
+      border:none;
+      transition: background .19s;
+      opacity:0; transform:translateY(70px); animation:fadein 1.2s .57s both;
+    }
+    .btn-main:hover { background:#ae8d54; color:#fff; }
 
-    <style>
-        :root {
-            --main-bg: #18191a;
-            --card-bg: #232426ee;
-            --text-main: #e5e4e2;
-            --text-title: #fff;
-            --accent: #bfa97a;
-            --accent-hover: #e0c785;
-            --border: #353637;
-            --lux-shadow: 0 12px 32px 0 #000a;
-        }
-        html, body {
-            margin:0; padding:0; background:var(--main-bg); color:var(--text-main);
-            font-family: 'Inter', Arial, sans-serif; min-height: 100vh;
-        }
-        /* FONOVOE LUX SVG */
-        body::before {
-            content: "";
-            position: fixed;
-            z-index: 0;
-            left: 0; top: 0; width: 100vw; height: 100vh;
-            background: 
-              linear-gradient(130deg, #000b 0%, #232426cc 100%),
-              url('data:image/svg+xml;utf8,<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="%23fffbe8" stop-opacity="0.28"/><stop offset="80%" stop-color="%23bfa97a" stop-opacity="0.38"/></linearGradient></defs><g stroke="url(%23gold)" stroke-width="1.2" opacity="0.34"><path d="M0 200Q480 450 960 200T1920 200"/><path d="M0 350Q480 100 960 350T1920 350"/><path d="M0 550Q480 800 960 550T1920 550"/><path d="M0 700Q480 450 960 700T1920 700"/><path d="M0 950Q480 1200 960 950T1920 950"/></g></svg>');
-            background-size: cover;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            animation: bgmove 14s linear infinite alternate;
-        }
-        @keyframes bgmove {
-            0% { background-position: 60% 0%; }
-            100% { background-position: 40% 100%; }
-        }
+    @keyframes fadein {
+      from { opacity:0; transform:translateY(60px);}
+      to { opacity:1; transform:translateY(0);}
+    }
 
-        .content-root { position:relative; z-index:2; }
-        .navbar { background: transparent; border-bottom:1.5px solid var(--border);}
-        .navbar-brand, .nav-link { color: var(--text-title) !important; letter-spacing: 1px;}
-        .navbar-nav .nav-link { transition: color .2s; font-weight:500;}
-        .navbar-nav .nav-link:hover { color: var(--accent) !important;}
-        .hero {
-            min-height: 85vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center; padding-top: 100px; padding-bottom: 50px;
-            position:relative;
-        }
-        .hero::after {
-            content:""; z-index:1;
-            position:absolute; left:0; top:0; width:100%; height:100%;
-            background: linear-gradient(115deg, #18191a 65%, #232426a0 100%);
-            pointer-events:none;
-        }
-        .hero > .container { position:relative; z-index:2;}
-        .hero-title {
-            font-size: 3rem; font-weight: 700;
-            color: var(--accent); margin-bottom: 20px;
-            line-height: 1.1; letter-spacing: 1.5px;
-            text-shadow: 0 2px 32px #0007;
-            opacity:0; transform:translateY(30px); animation:fadein 1.5s .1s both;
-        }
-        .hero-sub {
-            font-size: 1.3rem; margin-bottom: 34px;
-            color: var(--text-main); font-weight: 500;
-            max-width: 600px; margin-left:auto; margin-right:auto;
-            opacity:0; transform:translateY(50px); animation:fadein 1.6s .5s both;
-        }
-        .btn-main {
-            background: var(--accent); color:var(--main-bg); border:none;
-            font-weight:700; padding:14px 38px; border-radius:25px;
-            transition:.23s; box-shadow:0 4px 24px #0005;
-            font-size:1.15rem; letter-spacing:1px;
-            opacity:0; transform:translateY(50px); animation:fadein 1.3s 1.2s both;
-        }
-        .btn-main:hover { background:var(--accent-hover); color:var(--main-bg);}
-        @keyframes fadein {
-            from { opacity:0; transform:translateY(40px);}
-            to { opacity:1; transform:translateY(0);}
-        }
-        .section-title {
-            font-size:2.05rem; margin-bottom:30px; color:var(--accent);
-            font-weight:700; text-align:center;
-            letter-spacing:1.2px;
-            font-family: 'Playfair Display', serif;
-            text-shadow:0 1px 18px #0003;
-        }
-        .card {
-            background: var(--card-bg); border:1.5px solid var(--border);
-            border-radius:20px; box-shadow: var(--lux-shadow);
-            margin-bottom:32px; transition: transform .26s cubic-bezier(.27,.84,.4,1.12), box-shadow .26s;
-            position:relative; z-index:2;
-        }
-        .card:hover {
-            transform: translateY(-9px) scale(1.03);
-            box-shadow: 0 18px 50px #000c;
-            border-color: var(--accent);
-        }
-        .platform-icon { font-size:38px; color: var(--accent); margin-bottom:12px;}
-        .section { padding: 64px 0; position:relative;}
-        .section::before {
-            content:""; position:absolute; inset:0;
-            background: linear-gradient(117deg, #22242680 55%, #bfa97a18 100%);
-            pointer-events:none; z-index:1;
-        }
-        .section > .container, .section > .container > .row {
-            position:relative; z-index:2;
-        }
-        .social-icons {
-            text-align:center; margin-top:12px;
-        }
-        .social-icons a {
-            margin:0 13px; font-size: 22px; color: var(--text-main); transition: color .18s; display:inline-block;
-        }
-        .social-icons a:hover { color:var(--accent);}
-        .footer {
-            background: var(--card-bg); padding: 28px 0 12px 0; text-align:center;
-            border-top:1.2px solid var(--border);
-            font-family: 'Inter', Arial, sans-serif;
-            font-size:1.08rem;
-            position:relative; z-index:2;
-        }
-        label { color:var(--accent); font-weight:500;}
-        .form-control {
-            background:var(--main-bg); color:var(--text-main);
-            border:1px solid var(--border); border-radius: 9px;
-        }
-        .form-control:focus { border-color:var(--accent); background:var(--main-bg); color:var(--text-title);}
-        ::placeholder { color:#b5b3ae; opacity:0.92;}
-        .card, .card .p-4, .card .text-center, .card .h-100 {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center;
-        }
-        .section .row {
-            justify-content: center;
-        }
-        @media(max-width: 991px) {
-            .section { padding: 36px 0;}
-            .hero { padding-top: 70px;}
-        }
-        @media(max-width: 767px) {
-            .hero-title { font-size:1.45rem;}
-            .hero-sub { font-size:.99rem;}
-            .section-title { font-size:1.09rem;}
-            .card { margin-bottom:18px;}
-        }
-    </style>
+    .about-section {
+      background: var(--card-bg);
+      margin: -100px auto 0 auto;
+      border-radius: 24px;
+      max-width: 930px;
+      box-shadow: var(--shadow);
+      padding: 40px 40px 32px 40px;
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+    .about-img {
+      width:110px; height:110px; border-radius:50%; object-fit:cover;
+      box-shadow: 0 4px 32px #c2a36b25, 0 0 0 6px #efe4d7b7;
+      margin-bottom: 24px;
+      background: #fffbe8;
+    }
+    .about-title {
+      font-size: 2rem;
+      color: var(--accent);
+      font-family: 'Playfair Display',serif;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+    .about-desc { font-size:1.15rem; color:#28251e; margin-bottom:0; }
+    /* Cards */
+    .services-section {
+      padding: 64px 0 32px 0;
+    }
+    .services-title {
+      font-size:1.7rem;
+      color:var(--dark);
+      font-family:'Playfair Display',serif;
+      font-weight:600;
+      text-align:center;
+      margin-bottom:36px;
+    }
+    .service-card {
+      background:var(--card-bg);
+      border-radius:19px;
+      box-shadow: var(--shadow);
+      border:1px solid var(--border);
+      transition:.22s;
+      padding:38px 22px 24px 22px;
+      text-align:center;
+      height:100%;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+    }
+    .service-card:hover { transform:translateY(-9px) scale(1.03); box-shadow:0 16px 50px #e9ddc8c5; border-color:var(--accent);}
+    .service-icon { font-size:2.6rem; color:var(--accent); margin-bottom:18px;}
+    .service-title { font-size:1.17rem; font-family:'Playfair Display',serif; color:var(--dark); font-weight:600;}
+    .service-desc { color:#2c2721;}
+    /* Контакты */
+    .contacts-section { padding:48px 0 32px 0;}
+    .contact-card {
+      background:var(--card-bg); box-shadow:var(--shadow);
+      border-radius:18px; border:1.2px solid var(--border);
+      padding:36px 26px 22px 26px;
+      max-width:390px; margin:0 auto;
+      text-align:center;
+    }
+    .contact-title { color:var(--accent); font-family:'Playfair Display',serif; font-size:1.3rem;}
+    .contact-link { color:var(--dark); font-weight:500; text-decoration:none; }
+    .contact-link:hover { color:var(--accent);}
+    /* Footer */
+    .footer {
+      background: var(--card-bg);
+      text-align:center;
+      padding: 28px 0 10px 0;
+      font-size:1.03rem;
+      border-top: 1.2px solid var(--border);
+      color:#92826a;
+      font-family:'Inter',sans-serif;
+      letter-spacing:1px;
+      margin-top:24px;
+    }
+    /* Партнёры */
+    .partners-row { margin-top:24px; margin-bottom: 10px; display:flex; justify-content:center; gap:28px;}
+    .partner-logo {
+      width: 100px; height:50px; object-fit:contain; filter: grayscale(1) brightness(0.76);
+      opacity:0.8; background:transparent; border-radius:15px;
+    }
+    @media (max-width: 991px) {
+      .about-section { padding:30px 6vw 22px 6vw;}
+    }
+    @media (max-width: 767px) {
+      .hero-title { font-size:1.43rem; padding: 13px 12px 6px 12px;}
+      .about-title { font-size:1.25rem; }
+      .about-section { padding:19px 4vw 10px 4vw;}
+      .services-section { padding:30px 0 16px 0;}
+    }
+  </style>
 </head>
 <body>
-    <!-- Luxury Background Pattern & Fading Effects -->
-    <div class="content-root">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Valerius Weichel</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon" style="color:var(--accent);"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Startseite</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">Über mich</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Leistungen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-title">Unternehmensfinanzierung<br>in Deutschland</div>
-            <div class="hero-sub">Strukturiert. Persönlich. Effizient.<br>Finanzierungslösungen für Firmen über DV Finanzierung</div>
-            <a href="#contact" class="btn btn-main mt-2">Beratung anfragen</a>
-        </div>
-    </section>
-
-    <!-- Über mich -->
-<section id="about" class="section">
+  <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <h2 class="section-title">Über Valerius Weichel</h2>
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-4 col-md-5 mb-4 mb-md-0 text-center">
-                <div style="
-                    display:inline-block; 
-                    border-radius:28px; 
-                    overflow:hidden;
-                    box-shadow:0 6px 32px #0008, 0 0 0 6px #bfa97a55;">
-                    <img src="DSC_8240.jpg" alt="Valerius Weichel" 
-                        style="width:100%; max-width:270px; display:block; border-radius:28px; filter:brightness(0.98) contrast(1.04);" />
-                </div>
-                <a href="https://www.linkedin.com/in/valerius-weichel/" target="_blank"
-                   class="btn btn-main mt-3" style="font-size:1rem; padding:10px 24px;">
-                    <i class="fab fa-linkedin mr-1"></i> LinkedIn-Profil ansehen
-                </a>
-            </div>
-            <div class="col-lg-8 col-md-7">
-                <div class="card p-4" style="background:rgba(35,36,38,0.97);">
-                    <p>
-                        Ich bin Valerius Weichel – Spezialist für strukturierte Unternehmensfinanzierung in Deutschland.<br><br>
-                        Mein Fokus: passgenaue Finanzierungslösungen für Unternehmen, den Mittelstand und wachstumsorientierte Firmen.
-                        Durch strategische Partnerschaften mit <b>DV Finanzierung</b> ermögliche ich effiziente Kapitalbeschaffung – 
-                        von Liquiditätssteigerung bis zu nachhaltigem Wachstum.<br><br>
-                        Ihr Vorteil: absolute Diskretion, schnelle Prozesse, individuelle Begleitung. Klare Strukturen für nachhaltigen Unternehmenserfolg.
-                    </p>
-                </div>
-            </div>
-        </div>
+      <a class="navbar-brand" href="#">Valerius Weichel</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon" style="color:var(--accent);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Startseite</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">Über mich</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Leistungen</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
+        </ul>
+      </div>
     </div>
-</section>
-
-
-    <!-- Leistungen -->
-    <section id="services" class="section">
-        <div class="container">
-            <h2 class="section-title">Leistungen & Schwerpunkte</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
-                    <div class="card text-center p-4 w-100">
-                        <div class="platform-icon"><i class="fas fa-piggy-bank"></i></div>
-                        <h4 style="color:var(--text-title); font-family:'Playfair Display', serif;">Strukturierte Finanzierung</h4>
-                        <p>
-                            Individuelle Finanzierungskonzepte: Betriebskapital, Investitionen, Expansion und Restrukturierung – ohne klassische Bankenrestriktionen.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
-                    <div class="card text-center p-4 w-100">
-                        <div class="platform-icon"><i class="fas fa-exchange-alt"></i></div>
-                        <h4 style="color:var(--text-title); font-family:'Playfair Display', serif;">Alternative Liquidität</h4>
-                        <p>
-                            Zugang zu exklusiven DV Finanzierung-Produkten: Factoring, Sale-and-Lease-Back, kurzfristige Liquidität – schnell, diskret, flexibel.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
-                    <div class="card text-center p-4 w-100">
-                        <div class="platform-icon"><i class="fas fa-user-tie"></i></div>
-                        <h4 style="color:var(--text-title); font-family:'Playfair Display', serif;">Beratung & Begleitung</h4>
-                        <p>
-                            Persönliche Beratung, umfassende Analyse und professionelle Begleitung – von der Erstberatung bis zur erfolgreichen Kapitalaufnahme.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Kontakt & Beratung</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <div class="card p-4">
-                        <form action="mailto:valerius.weichel@dvag.de" method="POST" enctype="text/plain">
-                            <div class="form-group text-left">
-                                <label for="name">Ihr Name</label>
-                                <input type="text" class="form-control" id="name" name="Name" required>
-                            </div>
-                            <div class="form-group text-left">
-                                <label for="email">Ihre E-Mail</label>
-                                <input type="email" class="form-control" id="email" name="Email" required>
-                            </div>
-                            <div class="form-group text-left">
-                                <label for="message">Ihre Nachricht</label>
-                                <textarea class="form-control" id="message" name="Nachricht" rows="4" required></textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-main">Absenden</button>
-                            </div>
-                        </form>
-                        <div class="mt-3 text-center">
-                            <i class="fas fa-envelope"></i> <a href="mailto:valerius.weichel@dvag.de" style="color:var(--accent);">valerius.weichel@dvag.de</a><br>
-                            <i class="fas fa-phone"></i> <a href="tel:+491794724210" style="color:var(--accent);">+49 179 4724210</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <div class="footer">
-        <div>
-            <span style="color:var(--accent); font-weight:500; font-family:'Playfair Display',serif;">&copy; 2025 Valerius Weichel</span>
-            — Finanzierungspartner für den Mittelstand
-            <div class="social-icons mt-2">
-                <a href="https://www.linkedin.com/in/valerius-weichel/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:valerius.weichel@dvag.de"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+491794724210"><i class="fas fa-phone"></i></a>
-            </div>
-        </div>
+  </nav>
+  <section class="hero" id="home">
+    <div class="hero-bgsvg"></div>
+    <div class="hero-content">
+      <div class="hero-title">Unternehmensfinanzierung<br>in Deutschland</div>
+      <div class="hero-sub">Strukturiert. Persönlich. Effizient.<br>Finanzierungslösungen für Firmen über DV Finanzierung</div>
+      <a href="#contact" class="btn btn-main mt-2">Beratung anfragen</a>
     </div>
-    </div> <!-- content-root -->
-
-    <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </section>
+  <section id="about" class="about-section">
+    <!-- Поставь свою фотку или эмблему сюда -->
+    <img class="about-img" src="img/me.jpg" alt="Profilbild" />
+    <div class="about-title">Valerius Weichel</div>
+    <div class="about-desc">
+      Experte für strukturierte Unternehmensfinanzierung in Deutschland. Ich entwickle maßgeschneiderte Finanzierungslösungen und begleite Firmen bei der effizienten Kapitalbeschaffung.<br> Absolute Diskretion, persönliche Beratung, schnelle Prozesse.  
+    </div>
+  </section>
+  <section id="services" class="services-section">
+    <div class="services-title">Leistungen & Schwerpunkte</div>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="fas fa-piggy-bank"></i></div>
+            <div class="service-title">Strukturierte Finanzierung</div>
+            <div class="service-desc">
+              Individuelle Finanzierungskonzepte: Betriebskapital, Investitionen, Expansion und Restrukturierung.
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="fas fa-exchange-alt"></i></div>
+            <div class="service-title">Alternative Liquidität</div>
+            <div class="service-desc">
+              Zugang zu exklusiven DV Finanzierung-Produkten: Factoring, Sale-and-Lease-Back, kurzfristige Liquidität.
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="service-title">Beratung & Begleitung</div>
+            <div class="service-desc">
+              Persönliche Beratung und professionelle Begleitung – von der Erstberatung bis zur Kapitalaufnahme.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Partner Logos: Замени на свои -->
+    <div class="partners-row">
+      <img class="partner-logo" src="https://dv-gmbh.de/wp-content/uploads/2020/05/DV-Logo-512-300x300.png" alt="DV" />
+      <img class="partner-logo" src="https://www.commerzbank.de/ms/media/favicons/CB-2022-Ribbon_RGB.svg" alt="Commerzbank" />
+      <img class="partner-logo" src="https://dv-gmbh.de/wp-content/uploads/elementor/thumbs/1200px-Deutsche_Kreditbank_AG_Logo_2016-r4bvwbjn9uyl7oxnc975sttj6k2g7sv432u1rtnqps.png" alt="DKB" />
+      <img class="partner-logo" src="https://dv-gmbh.de/wp-content/uploads/elementor/thumbs/ALBIS_Leasing_Gruppe-CMYK-r4bvmbjgkb9rp1gkqfl1runznzcvbq5x1kz2yuhiww.png" alt="Albis" />
+      <img class="partner-logo" src="https://dv-gmbh.de/wp-content/uploads/elementor/thumbs/IKB_DtIndust_2z_rgb-IK-Blau_neu-r4bvwbjn9uyl7oxnc975sttj6k2g7sv432u1rtnqps.png" alt="IKB" />
+      <img class="partner-logo" src="https://dv-gmbh.de/wp-content/uploads/elementor/thumbs/VR_SmartFinanz_RGB-r4bvwbjn9uyl7oxnc975sttj6k2g7sv432u1rtnqps.png" alt="VR" />
+    </div>
+  </section>
+  <section id="contact" class="contacts-section">
+    <div class="container">
+      <div class="contact-card mx-auto">
+        <div class="contact-title mb-3">Kontakt & Beratung</div>
+        <div><i class="fas fa-envelope"></i> <a class="contact-link" href="mailto:valerius.weichel@dvag.de">valerius.weichel@dvag.de</a></div>
+        <div class="mt-2"><i class="fas fa-phone"></i> <a class="contact-link" href="tel:+491794724210">+49 179 4724210</a></div>
+        <div class="mt-2"><i class="fab fa-linkedin"></i> <a class="contact-link" target="_blank" href="https://www.linkedin.com/in/valerius-weichel/">LinkedIn</a></div>
+        <a href="/präsentation.pdf" class="btn btn-main mt-4" style="font-size:1.02rem;padding:10px 26px;">Präsentation herunterladen</a>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    &copy; 2025 Valerius Weichel – Finanzierungspartner für den Mittelstand
+  </footer>
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
